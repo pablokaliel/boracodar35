@@ -146,11 +146,12 @@ function Home(props) {
                 min="0"
                 max="3000"
                 value={dailyGoal}
-                onChange={(e) => setDailyGoal(parseInt(e.target.value))
+                onChange={(e) => {
+                  setDailyGoal(parseInt(e.target.value))
                   if(inputRangeRef.current) {
-                    inputRangeRef.current.style.background = linear-gradient(to right, green ${e.target.value}%, #fff ${e.target.value}%)
+                    inputRangeRef.current.style.background = `linear-gradient(to right, green ${e.target.value}%, #fff ${e.target.value}%)`
                   }
-                }
+                }}
                 
               />
             </DailyGoal>

@@ -6,6 +6,8 @@ export const Container = styled.div`
 
   width: 100%;
   height: 100vh;
+
+
 `;
 
 export const Swapper = styled.div`
@@ -16,6 +18,12 @@ export const Swapper = styled.div`
   flex-direction: column;
 
   gap: 76px;
+
+  @media (max-width: 770px) {
+    width: 100%;
+
+    
+  }
 `;
 
 export const Header = styled.div`
@@ -59,6 +67,12 @@ export const DivHello = styled.div`
 export const DivGoal = styled.div`
   display: flex;
   gap: 102px;
+
+  @media (max-width: 770px) {
+    flex-direction:column;
+    align-items:center;
+    padding-bottom: 67px;
+  }
 
   .modal {
     display: flex;
@@ -203,55 +217,20 @@ export const DivGoalDiary = styled.div`
 `;
 
 export const CustomRange = styled.input`
-  .range-input {
-    -webkit-appearance: none;
+input[type="range"] {
     appearance: none;
-    width: 320px;
-    cursor: pointer;
-    outline: none;
-    border-radius: 15px;
     height: 6px;
-    background: #322f40;
+    border-radius: 5px;
+    background: linear-gradient(to right, #7FC4ED 0%, #322F40 50%);
   }
 
-  .range-input::-webkit-slider-thumb {
+  input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    appearance: none;
-    height: 15px;
-    width: 15px;
-    background-color: #7fc4ed;
+
+    height: 18px;
+    width: 18px;
     border-radius: 50%;
-    border: none;
-    transition: 0.2s ease-in-out;
-  }
-
-  .range-input::-moz-range-thumb {
-    height: 15px;
-    width: 15px;
-    background-color: #7fc4ed;
-    border-radius: 50%;
-    border: none;
-    transition: 0.2s ease-in-out;
-  }
-
-  .range-input::-webkit-slider-thumb:hover {
-    box-shadow: 0 0 0 6px rgba(127, 196, 237, 0.1);
-  }
-  .range-input:active::-webkit-slider-thumb {
-    box-shadow: 0 0 0 7px rgba(127, 196, 237, 0.2);
-  }
-  .range-input:focus::-webkit-slider-thumb {
-    box-shadow: 0 0 0 7px rgba(127, 196, 237, 0.2);
-  }
-
-  .range-input::-moz-range-thumb:hover {
-    box-shadow: 0 0 0 6px rgba(127, 196, 237, 0.1);
-  }
-  .range-input:active::-moz-range-thumb {
-    box-shadow: 0 0 0 7px rgba(127, 196, 237, 0.2);
-  }
-  .range-input:focus::-moz-range-thumb {
-    box-shadow: 0 0 0 7px rgba(127, 196, 237, 0.2);
+    background: #7FC4ED;
   }
 `;
 
@@ -337,63 +316,44 @@ export const QuantifyTimer = styled.div`
 
   gap: 9px;
 
-  input[type="range"] {
-  /* removing default appearance */
-  -webkit-appearance: none;
-  appearance: none; 
-  width: 320px;
-  cursor: pointer;
-  outline: none;
-  border-radius: 15px;
-  height: 6px;
-  background: #322F40;
-}
+  .range-input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 320px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 15px;
+    height: 6px;
+    background: #322f40;
+  }
 
-/* Thumb: webkit */
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none; 
-  height: 18px;
-  width: 18px;
-  background-color: #7FC4ED;
-  border-radius: 50%;
-  border: none;
-  transition: .2s ease-in-out;
-}
+  .range-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    background-color: #7fc4ed;
+    border-radius: 50%;
+    border: none;
+    transition: 0.2s ease-in-out;
+  }
 
-/* Thumb: Firefox */
-input[type="range"]::-moz-range-thumb {
-  height: 15px;
-  width: 15px;
-  background-color: #7FC4ED;
-  border-radius: 50%;
-  border: none;
-  transition: .2s ease-in-out;
-}
+  .range-input::-moz-range-thumb {
+    height: 15px;
+    width: 15px;
+    background-color: #7fc4ed;
+    border-radius: 50%;
+    border: none;
+    transition: 0.2s ease-in-out;
+  }
 
-/* Hover, active & focus Thumb: Webkit */
+  .range-input::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 6px rgba(127, 196, 237, 0.1);
+  }
 
-input[type="range"]::-webkit-slider-thumb:hover {
-  box-shadow: 0 0 0 10px rgba(127, 196, 237, .1)
-}
-input[type="range"]:active::-webkit-slider-thumb {
-  box-shadow: 0 0 0 13px rgba(127, 196, 237, .2)
-}
-input[type="range"]:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 13px rgba(127, 196, 237, .2)
-}
-
-/* Hover, active & focus Thumb: Firfox */
-
-input[type="range"]::-moz-range-thumb:hover {
-  box-shadow: 0 0 0 10px rgba(127, 196, 237, .1)
-}
-input[type="range"]:active::-moz-range-thumb {
-  box-shadow: 0 0 0 13px rgba(127, 196, 237, .2)
-}
-input[type="range"]:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 13px rgba(127, 196, 237, .2)    
-}
+  .range-input::-moz-range-thumb:hover {
+    box-shadow: 0 0 0 6px rgba(127, 196, 237, 0.1);
+  }
 
 `;
 
