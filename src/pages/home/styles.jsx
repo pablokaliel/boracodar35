@@ -2,12 +2,16 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: grid;
-  place-content: center;
+  align-items:center;
+  justify-content:center;
 
   width: 100%;
   height: 100vh;
 
-
+  @media (max-width: 770px) {
+    align-items:flex-start;
+    margin-top:76px;
+}
 `;
 
 export const Swapper = styled.div`
@@ -21,8 +25,6 @@ export const Swapper = styled.div`
 
   @media (max-width: 770px) {
     width: 100%;
-
-    
   }
 `;
 
@@ -69,8 +71,8 @@ export const DivGoal = styled.div`
   gap: 102px;
 
   @media (max-width: 770px) {
-    flex-direction:column;
-    align-items:center;
+    flex-direction: column;
+    align-items: center;
     padding-bottom: 67px;
   }
 
@@ -96,7 +98,7 @@ export const DivGoal = styled.div`
 
     border-radius: 23px;
 
-    background: var(--base-gray-400, #1d1b26);
+    background: var(--gray-400);
     box-shadow: 17px 25px 57px 0px rgba(17, 16, 24, 0.25);
 
     display: flex;
@@ -121,19 +123,19 @@ export const DivGoal = styled.div`
       padding: 5px;
       gap: 10px;
 
-      background: #322f40;
+      background: var(--gray-200);
       border: 0;
       border-radius: 100%;
 
       transition: all 0.3s;
 
       &:hover {
-        background: #282533;
+        background: var(--gray-300);
       }
     }
 
     h1 {
-      color: var(--produto-blue, #7fc4ed);
+      color: var(--blue);
       text-align: center;
 
       font-size: 24px;
@@ -157,10 +159,10 @@ export const DivDrink = styled.div`
   gap: 40px;
 
   border-radius: 20px;
-  background: var(--produto-blue, #7fc4ed);
+  background: var(--blue);
 
   span {
-    color: #1f2128;
+    color: var(--gray-400);
 
     font-size: 14px;
     font-style: normal;
@@ -186,7 +188,7 @@ export const Drink = styled.div`
     gap: 9px;
 
     h1 {
-      color: #1f2128;
+      color:var(--gray-400);
 
       text-align: center;
       font-size: 20px;
@@ -196,7 +198,7 @@ export const Drink = styled.div`
     }
 
     span {
-      color: #1f2128;
+      color:var(--gray-400);
 
       font-size: 16px;
       font-style: normal;
@@ -216,24 +218,6 @@ export const DivGoalDiary = styled.div`
   height: 350px;
 `;
 
-export const CustomRange = styled.input`
-input[type="range"] {
-    appearance: none;
-    height: 6px;
-    border-radius: 5px;
-    background: linear-gradient(to right, #7FC4ED 0%, #322F40 50%);
-  }
-
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-
-    height: 18px;
-    width: 18px;
-    border-radius: 50%;
-    background: #7FC4ED;
-  }
-`;
-
 export const DailyGoal = styled.div`
   display: flex;
   flex-direction: column;
@@ -241,44 +225,35 @@ export const DailyGoal = styled.div`
 
   gap: 9px;
 
-  .range-input {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 320px;
-    cursor: pointer;
-    outline: none;
-    border-radius: 15px;
+  input[type="range"] {
     height: 6px;
-    background: #322f40;
+    width:320px;
+    border-radius: 5px;
+    accent-color:#7FC4ED;
+    outline:none;
+    background-color:#7FC4ED;
+    border:none;
   }
-
-  .range-input::-webkit-slider-thumb {
+  
+  input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    appearance: none;
-    height: 15px;
-    width: 15px;
-    background-color: #7fc4ed;
+    
+    height: 18px;
+    width: 18px;
     border-radius: 50%;
-    border: none;
-    transition: 0.2s ease-in-out;
+    background: #7FC4ED;
+    cursor: pointer;
   }
 
-  .range-input::-moz-range-thumb {
-    height: 15px;
-    width: 15px;
-    background-color: #7fc4ed;
-    border-radius: 50%;
-    border: none;
-    transition: 0.2s ease-in-out;
+  input[type="range"]::-webkit-slider-thumb:hover {
+    outline: 6px solid rgba(127, 196, 237, .10);
   }
 
-  .range-input::-webkit-slider-thumb:hover {
-    box-shadow: 0 0 0 6px rgba(127, 196, 237, 0.1);
+  input[type="range"]::-webkit-slider-thumb:active {
+    outline: 6px solid rgba(127, 196, 237, .2);
+    scale: .95;
   }
 
-  .range-input::-moz-range-thumb:hover {
-    box-shadow: 0 0 0 6px rgba(127, 196, 237, 0.1);
-  }
 `;
 
 export const Daily = styled.div`
@@ -288,7 +263,7 @@ export const Daily = styled.div`
   align-self: stretch;
 
   span {
-    color: #7fc4ed;
+    color: var(--blue);
 
     font-size: 16px;
     font-style: normal;
@@ -316,45 +291,34 @@ export const QuantifyTimer = styled.div`
 
   gap: 9px;
 
-  .range-input {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 320px;
-    cursor: pointer;
-    outline: none;
-    border-radius: 15px;
+  input[type="range"] {
     height: 6px;
-    background: #322f40;
+    width:320px;
+    border-radius: 5px;
+    accent-color:#7FC4ED;
+    outline:none;
+    background-color:#7FC4ED;
+    border:none;
   }
-
-  .range-input::-webkit-slider-thumb {
+  
+  input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    appearance: none;
-    height: 15px;
-    width: 15px;
-    background-color: #7fc4ed;
+    
+    height: 18px;
+    width: 18px;
     border-radius: 50%;
-    border: none;
-    transition: 0.2s ease-in-out;
+    background: #7FC4ED;
+    cursor: pointer;
   }
 
-  .range-input::-moz-range-thumb {
-    height: 15px;
-    width: 15px;
-    background-color: #7fc4ed;
-    border-radius: 50%;
-    border: none;
-    transition: 0.2s ease-in-out;
+  input[type="range"]::-webkit-slider-thumb:hover {
+    outline: 6px solid rgba(127, 196, 237, .10);
   }
 
-  .range-input::-webkit-slider-thumb:hover {
-    box-shadow: 0 0 0 6px rgba(127, 196, 237, 0.1);
+  input[type="range"]::-webkit-slider-thumb:active {
+    outline: 6px solid rgba(127, 196, 237, .2);
+    scale: .95;
   }
-
-  .range-input::-moz-range-thumb:hover {
-    box-shadow: 0 0 0 6px rgba(127, 196, 237, 0.1);
-  }
-
 `;
 
 export const Quantify = styled.div`
@@ -364,7 +328,7 @@ export const Quantify = styled.div`
   align-self: stretch;
 
   span {
-    color: #7fc4ed;
+    color: var(--blue);
 
     font-size: 16px;
     font-style: normal;
@@ -408,7 +372,7 @@ export const DivHour = styled.div`
 
   gap: 4px;
 
-  color: var(--base-gray-200, #322f40);
+  color: var(--gray-200);
   text-align: center;
 
   font-size: 16px;
@@ -430,10 +394,10 @@ export const Second = styled.div`
   gap: 8px;
 
   border-radius: 10px;
-  border: 1px solid var(--base-gray-200, #322f40);
-  background: var(--base-gray-400, #1d1b26);
+  border: 1px solid var(--gray-200);
+  background: var(--gray-400);
 
-  color: var(--base-gray-100, #fbf9fe);
+  color: var(--gray-100);
   text-align: center;
 
   font-size: 32px;
@@ -447,7 +411,7 @@ export const DivMin = styled.div`
   display: flex;
   gap: 4px;
 
-  color: var(--base-gray-200, #322f40);
+  color: var(--gray-200);
   text-align: center;
 
   font-size: 16px;
@@ -470,10 +434,10 @@ export const Min = styled.div`
   gap: 8px;
 
   border-radius: 10px;
-  border: 1px solid var(--base-gray-200, #322f40);
-  background: var(--base-gray-400, #1d1b26);
+  border: 1px solid var(--gray-200);
+  background: var(--gray-400);
 
-  color: var(--base-gray-100, #fbf9fe);
+  color: var(--gray-100);
   text-align: center;
 
   font-size: 32px;
@@ -494,10 +458,10 @@ export const Button = styled.button`
   gap: 8px;
 
   border-radius: 6px;
-  background: var(--produto-blue, #7fc4ed);
+  background: var(--blue);
   border: 0;
 
-  color: var(--base-gray-500, #0f0e13);
+  color: var(--gray-500);
   text-align: center;
 
   font-size: 16px;
@@ -508,6 +472,6 @@ export const Button = styled.button`
   transition: all 0.3s;
 
   &:hover {
-    background: var(--produto-blue-dark, #659aba);
+    background: var(--blue-dark);
   }
 `;

@@ -1,5 +1,25 @@
 import { useEffect, useRef, useState } from "react";
-import { Container, Swapper, Header, DivHello, DivGoal, DivDrink, Drink, DivGoalDiary, DailyGoal, Daily, QuantifyTimer, Quantify, DivImage, CustomRange, DivTimer, DivHour, Second, DivMin, Min, Button } from "./styles";
+import {
+  Container,
+  Swapper,
+  Header,
+  DivHello,
+  DivGoal,
+  DivDrink,
+  Drink,
+  DivGoalDiary,
+  DailyGoal,
+  Daily,
+  QuantifyTimer,
+  Quantify,
+  DivImage,
+  DivTimer,
+  DivHour,
+  Second,
+  DivMin,
+  Min,
+  Button,
+} from "./styles";
 
 import { IoCloseOutline } from "react-icons/io5";
 import { RxChevronRight } from "react-icons/rx";
@@ -19,7 +39,8 @@ function Home(props) {
   const [amountToAdd, setAmountToAdd] = useState(300);
 
   const [percentage, setPercentage] = useState(0);
-  const inputRangeRef = useRef(null)
+
+
 
   const startTimer = () => {
     setMinutes(1);
@@ -140,17 +161,14 @@ function Home(props) {
                 <p>{dailyGoal}ml</p>
               </Daily>
               <input
-              ref={inputRangeRef}
-             className="range-input"
+                 className="range-slider"
                 type="range"
                 min="0"
                 max="3000"
+                step={5}
                 value={dailyGoal}
                 onChange={(e) => {
-                  setDailyGoal(parseInt(e.target.value))
-                  if(inputRangeRef.current) {
-                    inputRangeRef.current.style.background = `linear-gradient(to right, green ${e.target.value}%, #fff ${e.target.value}%)`
-                  }
+                  setDailyGoal(Number(e.target.value));
                 }}
                 
               />
@@ -162,12 +180,14 @@ function Home(props) {
                 <p>{amountToAdd}ml</p>
               </Quantify>
               <input
-              className="range-input"
+                
                 type="range"
                 min="0"
                 max="300"
+                step={5}
                 value={amountToAdd}
                 onChange={(e) => setAmountToAdd(parseInt(e.target.value))}
+              
               />
             </QuantifyTimer>
 
