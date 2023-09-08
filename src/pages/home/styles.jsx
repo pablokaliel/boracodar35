@@ -1,20 +1,22 @@
 import styled from "styled-components";
 
+import { motion } from "framer-motion";
+
 export const Container = styled.div`
   display: grid;
-  align-items:center;
-  justify-content:center;
+  align-items: center;
+  justify-content: center;
 
   width: 100%;
   height: 100vh;
 
   @media (max-width: 770px) {
-    align-items:flex-start;
-    margin-top:76px;
-}
+    align-items: flex-start;
+    margin-top: 76px;
+  }
 `;
 
-export const Swapper = styled.div`
+export const Swapper = styled(motion.div)`
   width: 630px;
   height: 490px;
 
@@ -51,6 +53,13 @@ export const DivImage = styled.div`
 `;
 
 export const DivHello = styled.div`
+  div {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+  }
+
   span {
     font-size: 24px;
     font-style: normal;
@@ -180,6 +189,40 @@ export const Drink = styled.div`
 
   gap: 32px;
 
+  @keyframes vibration {
+    0% {
+      transform: translate(0px, 0px);
+    }
+    20% {
+      transform: translate(0px, 0px);
+    }
+    40% {
+      transform: translate(0px, 0px);
+    }
+    60% {
+      transform: translate(0px, 0px);
+    }
+    80% {
+      transform: translate(0px, 0px);
+    }
+    90% {
+      transform: translateX(-5px) translateY(1px);
+    }
+    95% {
+      transform: translateX(2px) translateY(-1px);
+    }
+    98% {
+      transform: translateX(-3px) translateY(1px);
+    }
+    100% {
+      transform: translateX(1px) translateY(2px);
+    }
+  }
+
+  .vibration {
+    animation: vibration 1s ease infinite;
+  }
+
   div {
     text-align: center;
     display: flex;
@@ -188,7 +231,7 @@ export const Drink = styled.div`
     gap: 9px;
 
     h1 {
-      color:var(--gray-400);
+      color: var(--gray-400);
 
       text-align: center;
       font-size: 20px;
@@ -198,7 +241,7 @@ export const Drink = styled.div`
     }
 
     span {
-      color:var(--gray-400);
+      color: var(--gray-400);
 
       font-size: 16px;
       font-style: normal;
@@ -222,38 +265,49 @@ export const DailyGoal = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
+  @media (max-width: 770px) {
+   width:100%;
+  }
   gap: 9px;
 
   input[type="range"] {
     height: 6px;
-    width:320px;
-    border-radius: 5px;
-    accent-color:#7FC4ED;
-    outline:none;
-    background-color:#7FC4ED;
-    border:none;
+    width: 320px;
+
+      @media (max-width: 770px) {
+   width:100%;
+   flex:1;
   }
-  
+
+    border-radius: 5px;
+
+    accent-color: #7fc4ed;
+    background-color: #7fc4ed;
+
+    outline: none;
+    border: none;
+  }
+
   input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    
+
     height: 18px;
     width: 18px;
+
     border-radius: 50%;
-    background: #7FC4ED;
+    background: #7fc4ed;
+
     cursor: pointer;
   }
 
   input[type="range"]::-webkit-slider-thumb:hover {
-    outline: 6px solid rgba(127, 196, 237, .10);
+    outline: 6px solid rgba(127, 196, 237, 0.1);
   }
 
   input[type="range"]::-webkit-slider-thumb:active {
-    outline: 6px solid rgba(127, 196, 237, .2);
-    scale: .95;
+    outline: 6px solid rgba(127, 196, 237, 0.2);
+    scale: 0.95;
   }
-
 `;
 
 export const Daily = styled.div`
@@ -288,36 +342,48 @@ export const QuantifyTimer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
+  @media (max-width: 770px) {
+   width:100%;
+  }
   gap: 9px;
 
   input[type="range"] {
     height: 6px;
-    width:320px;
-    border-radius: 5px;
-    accent-color:#7FC4ED;
-    outline:none;
-    background-color:#7FC4ED;
-    border:none;
+    width: 320px;
+
+      @media (max-width: 770px) {
+   width:100%;
+   flex:1;
   }
-  
+
+    border-radius: 5px;
+
+    accent-color: #7fc4ed;
+    background-color: #7fc4ed;
+
+    outline: none;
+    border: none;
+  }
+
   input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    
+
     height: 18px;
     width: 18px;
+
     border-radius: 50%;
-    background: #7FC4ED;
+    background: #7fc4ed;
+
     cursor: pointer;
   }
 
   input[type="range"]::-webkit-slider-thumb:hover {
-    outline: 6px solid rgba(127, 196, 237, .10);
+    outline: 6px solid rgba(127, 196, 237, 0.1);
   }
 
   input[type="range"]::-webkit-slider-thumb:active {
-    outline: 6px solid rgba(127, 196, 237, .2);
-    scale: .95;
+    outline: 6px solid rgba(127, 196, 237, 0.2);
+    scale: 0.95;
   }
 `;
 
@@ -348,6 +414,7 @@ export const Quantify = styled.div`
     letter-spacing: 0.36px;
   }
 `;
+
 export const DivTimer = styled.div`
   display: flex;
   align-items: center;
@@ -453,6 +520,10 @@ export const Button = styled.button`
   align-items: center;
 
   width: 320px;
+
+  @media (max-width: 770px) {
+    width:100%;
+  }
 
   padding: 16px;
   gap: 8px;

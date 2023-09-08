@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Container,
   Swapper,
@@ -24,6 +24,9 @@ import {
 import { IoCloseOutline } from "react-icons/io5";
 import { RxChevronRight } from "react-icons/rx";
 
+import Lottie from "lottie-react";
+import animation from "../../assets/animation.json";
+
 import mini_emoji from "../../assets/mini_emoji.svg";
 import emoji from "../../assets/emoji.png";
 
@@ -31,16 +34,15 @@ function Home(props) {
   const [profileData, setProfileData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
+
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(1);
 
-  const [dailyGoal, setDailyGoal] = useState(3000);
+  const [dailyGoal, setDailyGoal] = useState(2500);
   const [currentAmount, setCurrentAmount] = useState(0);
-  const [amountToAdd, setAmountToAdd] = useState(300);
+  const [amountToAdd, setAmountToAdd] = useState(200);
 
   const [percentage, setPercentage] = useState(0);
-
-
 
   const startTimer = () => {
     setMinutes(1);
@@ -55,7 +57,6 @@ function Home(props) {
     if (newPercentage >= 100) {
       showNotification("Parabéns! Meta diária batida com sucesso!");
     }
-
     setCurrentAmount(newAmount);
     setPercentage(newPercentage);
     closeModal();
@@ -69,14 +70,12 @@ function Home(props) {
     if (dailyGoal < amountToAdd) {
       setDailyGoal(amountToAdd);
     }
-
     const newPercentage = (currentAmount / dailyGoal) * 100;
     setPercentage(newPercentage);
   }, [dailyGoal, amountToAdd, currentAmount]);
 
   useEffect(() => {
     let intervalId;
-
     if (isRunning) {
       intervalId = setInterval(() => {
         if (seconds === 0 && minutes === 0) {
@@ -92,7 +91,6 @@ function Home(props) {
     } else {
       clearInterval(intervalId);
     }
-
     return () => clearInterval(intervalId);
   }, [isRunning, seconds, minutes]);
 
@@ -108,9 +106,8 @@ function Home(props) {
     const fetchGitHubProfile = async () => {
       try {
         const response = await fetch(
-          `https://api.github.com/users/pablokaliel`
+          `https://api.github.com/users/maykbrito`
         );
-
         if (response.ok) {
           const data = await response.json();
           setProfileData(data);
@@ -119,13 +116,16 @@ function Home(props) {
         console.error("Erro ao buscar perfil do GitHub:", error);
       }
     };
-
     fetchGitHubProfile();
   }, [props.username]);
 
   return (
     <Container>
-      <Swapper>
+      <Swapper
+        initial={{ scale: 0.3, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
         <Header>
           {profileData && (
             <DivImage>
@@ -137,7 +137,17 @@ function Home(props) {
           )}
           <DivHello>
             <span>Boa tarde,</span>
-            <h1>Pablo 👋</h1>
+            <div>
+              <h1>Pablo</h1>
+              <Lottie
+                animationData={animation}
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  transform: "rotate(-30deg)",
+                }}
+              />
+            </div>
           </DivHello>
         </Header>
 
@@ -146,10 +156,10 @@ function Home(props) {
             <span>{percentage.toFixed(2)}%</span>
 
             <Drink>
-              <img src={emoji} alt="" />
+              <img className="vibration" src={emoji} alt="" />
               <div>
                 <h1>Beber água</h1>
-                <span>Meta: 3L</span>
+                <span>Meta: {dailyGoal}L</span>
               </div>
             </Drink>
           </DivDrink>
@@ -161,7 +171,7 @@ function Home(props) {
                 <p>{dailyGoal}ml</p>
               </Daily>
               <input
-                 className="range-slider"
+                className="range-slider"
                 type="range"
                 min="0"
                 max="3000"
@@ -170,7 +180,6 @@ function Home(props) {
                 onChange={(e) => {
                   setDailyGoal(Number(e.target.value));
                 }}
-                
               />
             </DailyGoal>
 
@@ -180,14 +189,12 @@ function Home(props) {
                 <p>{amountToAdd}ml</p>
               </Quantify>
               <input
-                
                 type="range"
                 min="0"
                 max="300"
                 step={5}
                 value={amountToAdd}
                 onChange={(e) => setAmountToAdd(parseInt(e.target.value))}
-              
               />
             </QuantifyTimer>
 
