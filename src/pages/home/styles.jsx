@@ -85,7 +85,8 @@ export const DivGoal = styled.div`
     padding-bottom: 67px;
   }
 
-  .modal {
+  .modal,
+  .github-username-modal {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,6 +120,33 @@ export const DivGoal = styled.div`
     gap: 24px;
 
     position: relative;
+
+    .input-name {
+      background-color: #282533;
+      color: #fff;
+
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+
+      letter-spacing: 0.96px;
+      line-height: 2rem;
+
+      padding-top: 0.25rem;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      padding-bottom: 0.25rem;
+
+      border: 1px solid #322f40;
+      border-radius: 0.375rem;
+
+      &:focus {
+        border: 1px solid var(--blue);
+      }
+
+      &::placeholder {
+        color: rgba(243, 244, 246, 0.2);
+      }
+    }
 
     button {
       position: absolute;
@@ -266,7 +294,7 @@ export const DailyGoal = styled.div`
   flex-direction: column;
   align-items: flex-start;
   @media (max-width: 770px) {
-   width:100%;
+    width: 100%;
   }
   gap: 9px;
 
@@ -274,10 +302,10 @@ export const DailyGoal = styled.div`
     height: 6px;
     width: 320px;
 
-      @media (max-width: 770px) {
-   width:100%;
-   flex:1;
-  }
+    @media (max-width: 770px) {
+      width: 100%;
+      flex: 1;
+    }
 
     border-radius: 5px;
 
@@ -343,7 +371,7 @@ export const QuantifyTimer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   @media (max-width: 770px) {
-   width:100%;
+    width: 100%;
   }
   gap: 9px;
 
@@ -351,10 +379,10 @@ export const QuantifyTimer = styled.div`
     height: 6px;
     width: 320px;
 
-      @media (max-width: 770px) {
-   width:100%;
-   flex:1;
-  }
+    @media (max-width: 770px) {
+      width: 100%;
+      flex: 1;
+    }
 
     border-radius: 5px;
 
@@ -522,7 +550,7 @@ export const Button = styled.button`
   width: 320px;
 
   @media (max-width: 770px) {
-    width:100%;
+    width: 100%;
   }
 
   padding: 16px;

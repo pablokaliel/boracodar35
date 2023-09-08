@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Container,
   Swapper,
@@ -21,13 +21,16 @@ import {
   Button,
 } from "./styles";
 
+import { motion } from "framer-motion";
+
 import { IoCloseOutline } from "react-icons/io5";
 import { RxChevronRight } from "react-icons/rx";
+import mini_emoji from "../../assets/mini_emoji.svg";
 
 import Lottie from "lottie-react";
 import animation from "../../assets/animation.json";
 
-import mini_emoji from "../../assets/mini_emoji.svg";
+import avatar from "../../assets/img-avatar.png";
 import emoji from "../../assets/emoji.png";
 
 function Home(props) {
@@ -43,6 +46,78 @@ function Home(props) {
   const [amountToAdd, setAmountToAdd] = useState(200);
 
   const [percentage, setPercentage] = useState(0);
+
+  const [githubUsername, setGithubUsername] = useState("");
+  const [isGitHubUsernameModalOpen, setIsGitHubUsernameModalOpen] = useState(true);
+  const usernameInputRef = useRef(null);
+
+  const [greet, setGreet] = useState("");
+
+  useEffect(() => {
+    const getHoraAtual = () => {
+      const horaAtual = new Date();
+      const horaAtualEmHoras = horaAtual.getHours();
+
+      if (horaAtualEmHoras >= 5 && horaAtualEmHoras < 12) {
+        setGreet("Bom dia");
+      } else if (horaAtualEmHoras >= 12 && horaAtualEmHoras < 18) {
+        setGreet("Boa tarde");
+      } else {
+        setGreet("Boa noite");
+      }
+    };
+    getHoraAtual();
+  }, []);
+
+  useEffect(() => {
+    const fetchGitHubProfile = async () => {
+      try {
+        const response = await fetch(
+          `https://api.github.com/users/${githubUsername}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setProfileData(data);
+          setIsGitHubUsernameModalOpen(false);
+        } else {
+          console.error("Usuário do GitHub não encontrado.");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar perfil do GitHub:", error);
+      }
+    };
+
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter") {
+        handleModalConfirm();
+      }
+    };
+
+    const handleModalConfirm = () => {
+      fetchGitHubProfile();
+      closeGitHubUsernameModal();
+    };
+
+    if (isGitHubUsernameModalOpen) {
+      const inputRef = usernameInputRef.current;
+      if (inputRef) {
+        inputRef.addEventListener("keydown", handleKeyPress);
+      }
+    }
+
+    return () => {
+      if (isGitHubUsernameModalOpen) {
+        const inputRef = usernameInputRef.current;
+        if (inputRef) {
+          inputRef.removeEventListener("keydown", handleKeyPress);
+        }
+      }
+    };
+  }, [isGitHubUsernameModalOpen, githubUsername]);
+
+  const closeGitHubUsernameModal = () => {
+    setIsGitHubUsernameModalOpen(false);
+  };
 
   const startTimer = () => {
     setMinutes(1);
@@ -105,9 +180,7 @@ function Home(props) {
   useEffect(() => {
     const fetchGitHubProfile = async () => {
       try {
-        const response = await fetch(
-          `https://api.github.com/users/maykbrito`
-        );
+        const response = await fetch(`https://api.github.com/users/hello`);
         if (response.ok) {
           const data = await response.json();
           setProfileData(data);
@@ -130,15 +203,19 @@ function Home(props) {
           {profileData && (
             <DivImage>
               <img
-                src={profileData.avatar_url}
+                src={profileData.avatar_url || avatar}
                 alt="Imagem de perfil do GitHub"
               />
             </DivImage>
           )}
           <DivHello>
-            <span>Boa tarde,</span>
+            <span>{greet},</span>
             <div>
-              <h1>Pablo</h1>
+              <h1>
+                {profileData &&
+                  profileData.name &&
+                  profileData.name.split(" ")[0]}{" "}
+              </h1>
               <Lottie
                 animationData={animation}
                 style={{
@@ -215,15 +292,50 @@ function Home(props) {
             </Button>
           </DivGoalDiary>
 
+          {isGitHubUsernameModalOpen && (
+            <motion.div
+              className="github-username-modal"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <motion.div
+                className="modal-content"
+                initial={{ scale: 0.3, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
+                <h1>Informe seu nome de usuário do GitHub</h1>
+                <input
+                  className="input-name"
+                  type="text"
+                  placeholder="Seu Nome"
+                  value={githubUsername}
+                  onChange={(e) => setGithubUsername(e.target.value)}
+                  ref={usernameInputRef} // Adicione a referência aqui
+                />
+                <button onClick={closeGitHubUsernameModal}>
+                  <IoCloseOutline size={24} color="#fff" />
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+
           {isModalOpen && (
             <div className="modal">
-              <div className="modal-content" onClick={increaseAmount}>
+              <motion.div
+                className="modal-content"
+                onClick={increaseAmount}
+                initial={{ scale: 0.3, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
                 <img src={mini_emoji} alt="" />
                 <h1>Lembrete para beber água</h1>
                 <button onClick={closeModal}>
                   <IoCloseOutline size={24} color="#fff" />
                 </button>
-              </div>
+              </motion.div>
             </div>
           )}
         </DivGoal>
