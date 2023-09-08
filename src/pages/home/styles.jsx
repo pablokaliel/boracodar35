@@ -217,40 +217,6 @@ export const Drink = styled.div`
 
   gap: 32px;
 
-  @keyframes vibration {
-    0% {
-      transform: translate(0px, 0px);
-    }
-    20% {
-      transform: translate(0px, 0px);
-    }
-    40% {
-      transform: translate(0px, 0px);
-    }
-    60% {
-      transform: translate(0px, 0px);
-    }
-    80% {
-      transform: translate(0px, 0px);
-    }
-    90% {
-      transform: translateX(-5px) translateY(1px);
-    }
-    95% {
-      transform: translateX(2px) translateY(-1px);
-    }
-    98% {
-      transform: translateX(-3px) translateY(1px);
-    }
-    100% {
-      transform: translateX(1px) translateY(2px);
-    }
-  }
-
-  .vibration {
-    animation: vibration 1s ease infinite;
-  }
-
   div {
     text-align: center;
     display: flex;

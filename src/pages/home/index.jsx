@@ -233,7 +233,7 @@ function Home(props) {
             <span>{percentage.toFixed(2)}%</span>
 
             <Drink>
-              <img className="vibration" src={emoji} alt="" />
+              <img  src={emoji} alt="" />
               <div>
                 <h1>Beber água</h1>
                 <span>Meta: {dailyGoal}L</span>
