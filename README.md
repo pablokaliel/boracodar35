@@ -17,7 +17,7 @@ O desafio é criar um reminder para beber água<br/>
 <br>
 
 <p align="center">
-  <img src="https://github.com/pablokaliel/boracodar29/assets/104238801/0554e82a-33d1-47b6-bb73-e699ed8a56fd" width="100%">
+  <img src="https://github.com/pablokaliel/boracodar35/assets/104238801/55d0928b-4728-4280-8139-5cf0d93ef486" width="100%">
 </p>
 
 ## 🚀 Tecnologias
