@@ -98,7 +98,7 @@ export const DivGoal = styled.div`
     width: 100%;
     height: 100%;
 
-    background-color: var(--bg-gitmodal);
+    background-color: var(--bg-git-modal);
     z-index: 999;
   }
 
@@ -109,7 +109,7 @@ export const DivGoal = styled.div`
     border-radius: 23px;
 
     background: var(--gray-400);
-    box-shadow: 17px 25px 57px 0px var(--shadow-modalcontent);
+    box-shadow: 17px 25px 57px 0px var(--shadow-modal-content);
 
     display: flex;
     flex-direction: column;

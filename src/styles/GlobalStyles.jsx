@@ -20,8 +20,8 @@ export default createGlobalStyle`
   --gray-300: #272533;
   --gray-400: #1d1b26;
   --gray-500: #0f0e13;
-  --bg-gitmodal: rgba(0, 0, 0, 0.8);
-  --shadow-modalcontent: rgba(17, 16, 24, 0.25);
+  --bg-git-modal: rgba(0, 0, 0, 0.8);
+  --shadow-modal-content: rgba(17, 16, 24, 0.25);
 }
 
   body{
