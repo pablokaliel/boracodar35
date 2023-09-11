@@ -22,24 +22,30 @@ import {
 } from "./styles";
 
 import { motion } from "framer-motion";
+import Lottie from "lottie-react";
 
 import { IoCloseOutline } from "react-icons/io5";
 import { RxChevronRight } from "react-icons/rx";
-import mini_emoji from "../../assets/mini_emoji.svg";
 
-import Lottie from "lottie-react";
 import animation from "../../assets/animation.json";
+import watertwo from "../../assets/watertwo.json";
+import waternoanimatetwo from "../../assets/waternoanimatedtwo.jpg";
 
 import avatar from "../../assets/img-avatar.png";
-import emoji from "../../assets/emoji.png";
+import mini_emoji from "../../assets/mini_emoji.svg";
 
 function Home(props) {
   const [profileData, setProfileData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
 
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(1);
+  const [isTimerStarted, setIsTimerStarted] = useState(false);
+  const [isTimerActive, setIsTimerActive] = useState(false);
+
+  const [showWaterAnimation, setShowWaterAnimation] = useState(false);
 
   const [dailyGoal, setDailyGoal] = useState(2500);
   const [currentAmount, setCurrentAmount] = useState(0);
@@ -120,18 +126,31 @@ function Home(props) {
   };
 
   const startTimer = () => {
-    setMinutes(1);
-    setSeconds(0);
-    setIsRunning(true);
+    if (
+      !isTimerActive &&
+      (minutes !== 0 || seconds !== 0 || dailyGoal !== 0 || amountToAdd !== 0)
+    ) {
+      setIsRunning(true);
+      setIsTimerRunning(true);
+      setShowWaterAnimation(true);
+      setIsTimerActive(true);
+    }
   };
 
   const increaseAmount = () => {
+    if (percentage >= 100) {
+      showNotification("Você já atingiu a meta diária!");
+      return;
+    }
+
     const newAmount = currentAmount + amountToAdd;
-    const newPercentage = (newAmount / dailyGoal) * 100;
+    let newPercentage = (newAmount / dailyGoal) * 100;
 
     if (newPercentage >= 100) {
+      newPercentage = 100;
       showNotification("Parabéns! Meta diária batida com sucesso!");
     }
+
     setCurrentAmount(newAmount);
     setPercentage(newPercentage);
     closeModal();
@@ -155,7 +174,9 @@ function Home(props) {
       intervalId = setInterval(() => {
         if (seconds === 0 && minutes === 0) {
           setIsRunning(false);
+          setIsTimerRunning(false);
           openModal();
+          setIsTimerActive(false);
         } else if (seconds === 0) {
           setMinutes(minutes - 1);
           setSeconds(59);
@@ -233,7 +254,24 @@ function Home(props) {
             <span>{percentage.toFixed(2)}%</span>
 
             <Drink>
-              <img  src={emoji} alt="" />
+              {isTimerRunning && showWaterAnimation ? (
+                <Lottie
+                  animationData={watertwo}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              ) : (
+                <img
+                  src={waternoanimatetwo}
+                  alt="Imagem de água"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              )}
               <div>
                 <h1>Beber água</h1>
                 <span>Meta: {dailyGoal}L</span>
@@ -250,7 +288,7 @@ function Home(props) {
               <input
                 className="range-slider"
                 type="range"
-                min="0"
+                min="20"
                 max="3000"
                 step={5}
                 value={dailyGoal}
@@ -267,7 +305,7 @@ function Home(props) {
               </Quantify>
               <input
                 type="range"
-                min="0"
+                min="20"
                 max="300"
                 step={5}
                 value={amountToAdd}
@@ -277,17 +315,58 @@ function Home(props) {
 
             <DivTimer>
               <DivHour>
-                <Min>{minutes.toString().padStart(2, "0")}</Min>
+                <Min
+                  value={minutes < 10 ? `0${minutes}` : minutes}
+                  onChange={(e) => {
+                    const inputValue = parseInt(e.target.value);
+                    if (
+                      !isNaN(inputValue) &&
+                      inputValue >= 0 &&
+                      inputValue <= 59
+                    ) {
+                      setMinutes(inputValue);
+                    } else if (e.target.value.length === 0) {
+                      setMinutes(0);
+                    } else if (e.target.value.length === 2) {
+                      setMinutes(Math.min(inputValue, 99));
+                    }
+                  }}
+                  placeholder="Minutos"
+                  readOnly={isTimerStarted}
+                />
                 <span>m</span>
               </DivHour>
               <p>:</p>
               <DivMin>
-                <Second>{seconds.toString().padStart(2, "0")}</Second>
+                <Second
+                  value={seconds < 10 ? `0${seconds}` : seconds}
+                  onChange={(e) => {
+                    const inputValue = parseInt(e.target.value);
+                    if (
+                      !isNaN(inputValue) &&
+                      inputValue >= 0 &&
+                      inputValue <= 59
+                    ) {
+                      setSeconds(inputValue);
+                    } else if (e.target.value.length === 0) {
+                      setSeconds(0);
+                    } else if (e.target.value.length === 2) {
+                      setSeconds(Math.min(inputValue, 99));
+                    }
+                  }}
+                  placeholder="Segundos"
+                  readOnly={isTimerStarted}
+                />
                 <span>s</span>
               </DivMin>
             </DivTimer>
 
-            <Button onClick={startTimer}>
+            <Button
+              onClick={startTimer}
+              className={
+                minutes === 0 && seconds === 0 ? "button-disabled" : ""
+              }
+            >
               Começar <RxChevronRight size={24} color="#0F0E13" />
             </Button>
           </DivGoalDiary>
@@ -312,7 +391,7 @@ function Home(props) {
                   placeholder="Seu Nome"
                   value={githubUsername}
                   onChange={(e) => setGithubUsername(e.target.value)}
-                  ref={usernameInputRef} // Adicione a referência aqui
+                  ref={usernameInputRef}
                 />
                 <button onClick={closeGitHubUsernameModal}>
                   <IoCloseOutline size={24} color="#fff" />

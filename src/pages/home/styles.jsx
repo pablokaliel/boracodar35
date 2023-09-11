@@ -98,7 +98,7 @@ export const DivGoal = styled.div`
     width: 100%;
     height: 100%;
 
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: var(--bg-gitmodal);
     z-index: 999;
   }
 
@@ -109,7 +109,7 @@ export const DivGoal = styled.div`
     border-radius: 23px;
 
     background: var(--gray-400);
-    box-shadow: 17px 25px 57px 0px rgba(17, 16, 24, 0.25);
+    box-shadow: 17px 25px 57px 0px var(--shadow-modalcontent);
 
     display: flex;
     flex-direction: column;
@@ -122,29 +122,29 @@ export const DivGoal = styled.div`
     position: relative;
 
     .input-name {
-      background-color: #282533;
-      color: #fff;
+      background-color: var(--gray-300);
+      color: var(--white);
 
       outline: 2px solid transparent;
       outline-offset: 2px;
 
       letter-spacing: 0.96px;
-      line-height: 2rem;
+      line-height: 32px;
 
-      padding-top: 0.25rem;
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-      padding-bottom: 0.25rem;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      padding-left: 12px;
+      padding-right: 12px;
 
-      border: 1px solid #322f40;
-      border-radius: 0.375rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 6px;
 
       &:focus {
         border: 1px solid var(--blue);
       }
 
       &::placeholder {
-        color: rgba(243, 244, 246, 0.2);
+        color: var(--gray-150);
       }
     }
 
@@ -253,6 +253,12 @@ export const DivGoalDiary = styled.div`
   align-items: center;
 
   height: 350px;
+
+  .button-disabled {
+    pointer-events: none;
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
 `;
 
 export const DailyGoal = styled.div`
@@ -275,8 +281,8 @@ export const DailyGoal = styled.div`
 
     border-radius: 5px;
 
-    accent-color: #7fc4ed;
-    background-color: #7fc4ed;
+    accent-color: var(--blue);
+    background-color: var(--blue);
 
     outline: none;
     border: none;
@@ -289,17 +295,17 @@ export const DailyGoal = styled.div`
     width: 18px;
 
     border-radius: 50%;
-    background: #7fc4ed;
+    background: var(--blue);
 
     cursor: pointer;
   }
 
   input[type="range"]::-webkit-slider-thumb:hover {
-    outline: 6px solid rgba(127, 196, 237, 0.1);
+    outline: 6px solid var(--blue-dark-input);
   }
 
   input[type="range"]::-webkit-slider-thumb:active {
-    outline: 6px solid rgba(127, 196, 237, 0.2);
+    outline: 6px solid var(--blue-input);
     scale: 0.95;
   }
 `;
@@ -321,7 +327,7 @@ export const Daily = styled.div`
   }
 
   p {
-    color: #4e4964;
+    color: var(--text);
 
     text-align: right;
     font-size: 12px;
@@ -352,8 +358,8 @@ export const QuantifyTimer = styled.div`
 
     border-radius: 5px;
 
-    accent-color: #7fc4ed;
-    background-color: #7fc4ed;
+    accent-color: var(--blue);
+    background-color: var(--blue);
 
     outline: none;
     border: none;
@@ -366,17 +372,17 @@ export const QuantifyTimer = styled.div`
     width: 18px;
 
     border-radius: 50%;
-    background: #7fc4ed;
+    background: var(--blue);
 
     cursor: pointer;
   }
 
   input[type="range"]::-webkit-slider-thumb:hover {
-    outline: 6px solid rgba(127, 196, 237, 0.1);
+    outline: 6px solid var(--blue-dark-input);
   }
 
   input[type="range"]::-webkit-slider-thumb:active {
-    outline: 6px solid rgba(127, 196, 237, 0.2);
+    outline: 6px solid var(--blue-input);
     scale: 0.95;
   }
 `;
@@ -398,7 +404,7 @@ export const Quantify = styled.div`
   }
 
   p {
-    color: #4e4964;
+    color: var(--text);
 
     text-align: right;
     font-size: 12px;
@@ -416,7 +422,7 @@ export const DivTimer = styled.div`
   gap: 13px;
 
   p {
-    color: #fff;
+    color: var(--white);
 
     text-align: center;
     font-size: 32.305px;
@@ -443,7 +449,7 @@ export const DivHour = styled.div`
   letter-spacing: 0.48px;
 `;
 
-export const Second = styled.div`
+export const Second = styled.input`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -460,6 +466,10 @@ export const Second = styled.div`
 
   color: var(--gray-100);
   text-align: center;
+  outline: none;
+  &:focus {
+    border: 1px solid var(--blue);
+  }
 
   font-size: 32px;
   font-style: normal;
@@ -483,7 +493,7 @@ export const DivMin = styled.div`
   align-items: center;
 `;
 
-export const Min = styled.div`
+export const Min = styled.input`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -500,6 +510,10 @@ export const Min = styled.div`
 
   color: var(--gray-100);
   text-align: center;
+  outline: none;
+  &:focus {
+    border: 1px solid var(--blue);
+  }
 
   font-size: 32px;
   font-style: normal;
